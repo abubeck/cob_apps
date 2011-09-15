@@ -180,7 +180,9 @@ void cob_config_controller::sendVel(JntArray q_t, JntArray q_dot, JntArray q_dot
 void cob_config_controller::sendCartPose()
 {
 	KDL::Frame F_current;
-	F_current = arm_pose_ * base_odom_;
+	//std::cout << "Base odom: " << base_odom_.p.x() << ", " << base_odom_.p.y() << "\n";
+	F_current.p.x(arm_pose_.p.x() + base_odom_.p.x());
+	F_current.p.y(arm_pose_.p.y() + base_odom_.p.y());
 	geometry_msgs::PoseStamped pose;
 	tf::PoseKDLToMsg(F_current, pose.pose);
 	cart_position_pub_.publish(pose);
