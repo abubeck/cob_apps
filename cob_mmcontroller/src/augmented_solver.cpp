@@ -19,9 +19,10 @@ namespace KDL
         maxiter(_maxiter)
     {
 		base_is_actived_ = true;
+		base_to_arm_factor_ = 0.1;
     }
 
-	augmented_solver::~augmented_solver()
+	augmented_solver::~augmented_solver() 
     {
     }
 
@@ -41,9 +42,9 @@ namespace KDL
         jac_base.setZero();
         if(base_is_actived_)
         {
-        	jac_base(0,0) = 1.0;
-        	jac_base(1,1) = 1.0;
-        	jac_base(5,2) = 1.0;
+        	jac_base(0,0) = base_to_arm_factor_;
+        	jac_base(1,1) = base_to_arm_factor_;
+        	jac_base(5,2) = base_to_arm_factor_;
         }
 
         //Put full jacobian matrix together
@@ -58,6 +59,16 @@ namespace KDL
         Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> W_v;
         W_v.resize(num_dof,num_dof);
         W_v.setZero();
+/*	W_v(0,0) = damping_factor*0;
+	W_v(1,1) = damping_factor*0;
+	W_v(2,2) = damping_factor*0;
+	W_v(3,3) = damping_factor*10;
+	W_v(4,4) = damping_factor*10;
+	W_v(5,5) = damping_factor*10;
+	W_v(6,6) = damping_factor*10;
+	W_v(7,7) = damping_factor*10.0;
+	W_v(8,8) = damping_factor*10.0;
+	W_v(9,9) = damping_factor*10.0;*/
         for(int i=0 ; i<num_dof ; i++)
         	W_v(i,i) = damping_factor;
 
