@@ -278,8 +278,8 @@ KDL::Twist cob_cartesian_trajectories::getTwist(double dt, Frame F_current)
 	std::cout << "Current (x,y): " << F_current.p.x() << ", " << F_current.p.y() << "\n";
 
 
-	lin.vel.x(0.4 * F_diff.p.x());
-	lin.vel.y(0.4 * F_diff.p.y());
+	lin.vel.x(0.6 * F_diff.p.x());
+	lin.vel.y(0.6 * F_diff.p.y());
 	lin.vel.z(0.0);
 	lin.rot.x(0.0);
 	lin.rot.y(0.0);
@@ -291,9 +291,9 @@ KDL::Twist cob_cartesian_trajectories::getTwist(double dt, Frame F_current)
 		lin.rot.z(-0.6);
 	}*/
 	if(dt < targetDuration/2)
-		lin.rot.z(-0.04*dt); //TODO: Rotationsgeschwindigkeit
+		lin.rot.z(-0.035*dt); //TODO: Rotationsgeschwindigkeit
 	else
-		lin.rot.z(-0.04*(targetDuration-dt)); //TODO: Rotationsgeschwindigkeit	
+		lin.rot.z(-0.035*(targetDuration-dt)); //TODO: Rotationsgeschwindigkeit	
 	//DEBUG
 	geometry_msgs::PoseArray poses;
 	poses.poses.resize(3);
