@@ -2,6 +2,7 @@
 <launch>
 
 	<!-- start trajectory manager -->
+	<!--<node pkg="cob_mmcontroller" type="cob_config_controller" name="arm_mmcontroller_node" ns="arm_controller" cwd="node" respawn="false" output="screen" launch-prefix="/usr/bin/gdb args" -->
 	<node pkg="cob_mmcontroller" type="cob_config_controller" name="arm_mmcontroller_node" ns="arm_controller" cwd="node" respawn="false" output="screen">
 		<remap from="/arm_controller/cart/command" to="/cmd_vel"/>
         <param name="arm_base" value="arm_0_link" />

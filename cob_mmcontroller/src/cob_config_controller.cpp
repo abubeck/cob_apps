@@ -20,6 +20,11 @@ cob_config_controller::cob_config_controller()
 			  return;
 	}
 	my_tree.getChain("base_link",arm_ee_name_, arm_base_chain);
+	if(arm_base_chain.getNrOfJoints() == 0)
+	{
+		ROS_ERROR("Specified arm_end_effector doesn't seem to exist in urdf description");
+		exit(0);
+	}
 	my_tree.getChain(arm_base_name_,arm_ee_name_, arm_chain);
 
 	//Initializing configuration control solver
